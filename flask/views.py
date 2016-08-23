@@ -8,6 +8,7 @@
     :copyright: (c) 2015 by Armin Ronacher.
     :license: BSD, see LICENSE for more details.
 """
+import os
 from .globals import request
 from ._compat import with_metaclass
 
@@ -60,7 +61,7 @@ class View(object):
     #: view function is created the result is automatically decorated.
     #:
     #: .. versionadded:: 0.8
-    decorators = ()
+    decorators =  ()
 
     def dispatch_request(self):
         """Subclasses have to override this method to implement the
@@ -70,7 +71,8 @@ class View(object):
         raise NotImplementedError()
 
     @classmethod
-    def as_view(cls, name, *class_args, **class_kwargs):
+    def as_view(cls, name, *class_args,
+           **class_kwargs):
         """Converts the class into an actual view function that can be used
         with the routing system.  Internally this generates a function on the
         fly which will instantiate the :class:`View` on each request and call
@@ -84,6 +86,7 @@ class View(object):
             return self.dispatch_request(*args, **kwargs)
 
         if cls.decorators:
+            a = 'hello'
             view.__name__ = name
             view.__module__ = cls.__module__
             for decorator in cls.decorators:
