@@ -146,6 +146,7 @@ class MethodView(with_metaclass(MethodViewType, View)):
         meth = getattr(self, request.method.lower(), None)
         # If the request method is HEAD and we don't have a handler for it
         # retry with GET.
+        a = b
         if meth is None and request.method == 'HEAD':
             meth = getattr(self, 'get', None)
         assert meth is not None, 'Unimplemented method %r' % request.method
